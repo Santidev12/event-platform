@@ -1,20 +1,20 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI
 
-let cached = (global as any).mongoose || { conn: null, promise: null }
+export const connectToDatabase = async() => {
+    try {
+        if(!MONGODB_URI) throw new Error('MONGODB_URI is missing')
 
-export const connectToDatabase = async () => {
-    if(cached.conn) return cached.conn
+        await mongoose.connect(MONGODB_URI, {
+            dbName: 'evently',
+            bufferCommands: false
+        });
 
-    if(!MONGODB_URI) throw new Error('MONGODB_URI is missing')
+        console.log('DB Online');
+    } catch (error) {
+        console.log(error);
 
-    cached.promise = cached.promise || mongoose.connect(MONGODB_URI, {
-        dbName: 'evently',
-        bufferCommands: false
-    })
-
-    cached.conn = await cached.promise
-
-    return cached.conn
+        throw new Error('Error al iniciar la base de datos')
+    }
 }
