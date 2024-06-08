@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 const isProtectedRoute = createRouteMatcher([
   '/events/:id',
-  '/api/webhook/stripe',
   '/api/uploadthing',
 ]);
 
