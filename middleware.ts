@@ -2,8 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 const isProtectedRoute = createRouteMatcher([
-  '/events/:id',
-  '/api/uploadthing',
+  // '/events/:id'
 ]);
 
 export default clerkMiddleware((auth, req) => {
