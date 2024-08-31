@@ -4,6 +4,7 @@ import { getEventById, getRelatedEventsByCategory } from "@/lib/actions/event.ac
 import { formatDateTime } from "@/lib/utils"
 import { SearchParamProps } from "@/types"
 import Image from "next/image"
+import { EventsApi } from "svix/dist/openapi"
 
 const EventDetails = async({ params: { id }, searchParams}: SearchParamProps) => {
 
@@ -98,9 +99,9 @@ const EventDetails = async({ params: { id }, searchParams}: SearchParamProps) =>
           emptyTitle="No Events Found"
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
-          limit={6}
-          page={1}
-          totalPages={2}
+          limit={3}
+          page={searchParams.page as string}
+          totalPages={relatedEvents?.totalPages}
         />
     </section>
     </>
